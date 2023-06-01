@@ -1,18 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    content: [
+        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    theme: {
+        fontFamily: {
+            sans: ['Work Sans', 'sans-serif'],
+            serif: ['Work Sans', 'sans'],
+        },
+        extend: {
+            colors: {
+                bg: '#fafafa',
+                text: '#3c3c3e',
+                alt: '#e6f3ef',
+                main: '#4285f4',
+                accent: '#fbbc04',
+            },
+        },
     },
-  },
-  plugins: [],
+    plugins: [
+        function ({ addVariant }) {
+            addVariant('child', '& > *');
+            addVariant('child-hover', '& > *:hover');
+        }
+    ],
 }
