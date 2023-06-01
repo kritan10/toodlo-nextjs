@@ -7,8 +7,8 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            sans: ['Work Sans', 'sans-serif'],
-            serif: ['Work Sans', 'sans'],
+            sans: ['var(--font-worksans)'],
+            serif: ['var(--font-worksans)'],
         },
         extend: {
             colors: {
@@ -22,8 +22,8 @@ module.exports = {
     },
     plugins: [
         function ({ addVariant }) {
-            addVariant('child', '& > *');
-            addVariant('child-hover', '& > *:hover');
-        }
+            addVariant('child', '& > *')
+            addVariant('child-hover', '& > *:hover')
+        },
     ],
 }
