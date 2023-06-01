@@ -64,39 +64,47 @@ function TaskDialog({
                     </label>
                     <input
                         id="task-title"
-                        className="w-full p-1 rounded-md border-2 border-alt"
+                        className="w-full px-3 py-1.5 rounded-md border-2 border-alt"
+                        placeholder="e.g. buy groceries"
                         {...register('title')}
+                        required
                     />
                 </div>
                 <div className="py-2">
                     <h2 className="inline-block pr-2 font-semibold">
                         Deadline
                     </h2>
-                    <input
-                        id="deadline-today"
-                        className="ml-5 mr-1"
-                        {...register('deadline')}
-                        type="radio"
-                        value="today"
-                        checked
-                    />
-                    <label htmlFor="deadline-today">Today</label>
-                    <input
-                        id="deadline-tommorow"
-                        className="ml-5 mr-1"
-                        {...register('deadline')}
-                        type="radio"
-                        value="tomorrow"
-                    />
-                    <label htmlFor="deadline-tommorow">Tommorow</label>
-                    <input
-                        id="deadline-week"
-                        className="ml-5 mr-1"
-                        {...register('deadline')}
-                        type="radio"
-                        value="week"
-                    />
-                    <label htmlFor="deadline-week">A Week</label>
+
+                    <label>
+                        <input
+                            className="ml-5 mr-1"
+                            {...register('deadline')}
+                            type="radio"
+                            value="today"
+                            checked
+                        />
+                        Today
+                    </label>
+
+                    <label>
+                        <input
+                            className="ml-5 mr-1"
+                            {...register('deadline')}
+                            type="radio"
+                            value="tomorrow"
+                        />
+                        Tommorow
+                    </label>
+
+                    <label>
+                        <input
+                            className="ml-5 mr-1"
+                            {...register('deadline')}
+                            type="radio"
+                            value="week"
+                        />
+                        A Week
+                    </label>
                 </div>
                 <div className="py-2">
                     <label className="pr-4 font-semibold">Category</label>
@@ -108,14 +116,14 @@ function TaskDialog({
                 </div>
                 <div className="my-2 flex justify-end">
                     <input
-                        className="mx-5 bg-slate-300 px-3 py-1"
+                        className="mx-5 bg-main bg-opacity-90 text-bg rounded-md px-5 py-1.5 cursor-pointer hover:opacity-75 transition-opacity"
                         type="submit"
                         value="Add"
                     />
                     <button
                         type="button"
                         onClick={() => setModal(false)}
-                        className="bg-slate-300 px-3 py-1"
+                        className="border-2 border-slate-300 rounded-md px-3 py-1.5 cursor-pointer hover:bg-red-200 hover:border-red-200 transition"
                     >
                         Cancel
                     </button>

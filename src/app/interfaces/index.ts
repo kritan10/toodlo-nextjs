@@ -9,10 +9,11 @@ export interface Task {
 
 export type ACTIONTYPE =
     | { type: 'addTask'; payload: Task }
-    | { type: 'editTask'; payload: Task }
+    | { type: 'editTask'; payload: { id: string; title: string } }
     | { type: 'deleteTask'; payload: string }
     | { type: 'starTask'; payload: string }
     | { type: 'completeTask'; payload: string }
+    | { type: 'fetchTasks'; payload: Task[] | null }
 
 export enum TaskFilter {
     MyDay = 'My Day',
@@ -20,5 +21,5 @@ export enum TaskFilter {
     Personal = 'Personal',
     Project = 'Projects',
     Completed = 'Completed',
-    AllTasks = 'All Tasks'
+    AllTasks = 'All Tasks',
 }
