@@ -3,7 +3,7 @@
 import { createContext, useState } from 'react'
 import { TaskFilter } from '../interfaces'
 
-const initTaskFilter: TaskFilter = TaskFilter.MyDay
+const initTaskFilter: TaskFilter = TaskFilter.AllTasks
 
 export const FilterContext = createContext<TaskFilter>(initTaskFilter)
 export const FilterSetterContext = createContext(null as unknown)

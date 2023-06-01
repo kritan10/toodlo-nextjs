@@ -1,18 +1,13 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Modal from 'react-modal'
 import { useForm } from 'react-hook-form'
 import { TasksDispatchContext } from '@/app/providers/tasks'
 import { ACTIONTYPE, Task } from '@/app/interfaces'
+import { TaskFilter } from '@/app/interfaces'
 
 Modal.setAppElement('#add-task')
-
-interface IFormInput {
-    title: string
-    category: string
-    deadline: string
-}
 
 function TaskDialog({
     modal,
@@ -21,24 +16,27 @@ function TaskDialog({
     modal: boolean
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-    const { register, handleSubmit } = useForm<IFormInput>()
+    const [title, setTitle] = useState('')
+    const [deadline, setDeadline] = useState('')
+    const [category, setCategory] = useState('')
+
     const taskDispatcher = useContext(TasksDispatchContext) as (
         action: ACTIONTYPE
     ) => Task[] | null
-    function onSubmit(data: IFormInput) {
+
+    function onSubmitHandler() {
         taskDispatcher({
             type: 'addTask',
             payload: {
                 id: Date.now().toString(),
-                title: data.title,
-                category: data.category,
-                deadline: data.deadline,
+                title: title,
+                category: category,
+                deadline: deadline,
                 isCompleted: false,
                 isImportant: false,
             },
         })
         setModal(false)
-        console.log(data)
     }
     return (
         <Modal
@@ -54,7 +52,7 @@ function TaskDialog({
                 },
             }}
         >
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
                 <h1 className="pb-5 text-xl font-bold font-['Barlow']">
                     Add Task
                 </h1>
@@ -66,7 +64,7 @@ function TaskDialog({
                         id="task-title"
                         className="w-full px-3 py-1.5 rounded-md border-2 border-alt"
                         placeholder="e.g. buy groceries"
-                        {...register('title')}
+                        onChange={(e) => setTitle(e.target.value)}
                         required
                     />
                 </div>
@@ -77,20 +75,25 @@ function TaskDialog({
 
                     <label>
                         <input
+                            onChange={(e) => {
+                                setDeadline(e.target.value)
+                            }}
                             className="ml-5 mr-1"
-                            {...register('deadline')}
                             type="radio"
+                            checked={deadline === 'today'}
                             value="today"
-                            checked
                         />
                         Today
                     </label>
 
                     <label>
                         <input
+                            onChange={(e) => {
+                                setDeadline(e.target.value)
+                            }}
                             className="ml-5 mr-1"
-                            {...register('deadline')}
                             type="radio"
+                            checked={deadline === 'tomorrow'}
                             value="tomorrow"
                         />
                         Tommorow
@@ -98,9 +101,12 @@ function TaskDialog({
 
                     <label>
                         <input
+                            onChange={(e) => {
+                                setDeadline(e.target.value)
+                            }}
                             className="ml-5 mr-1"
-                            {...register('deadline')}
                             type="radio"
+                            checked={deadline === 'week'}
                             value="week"
                         />
                         A Week
@@ -108,18 +114,26 @@ function TaskDialog({
                 </div>
                 <div className="py-2">
                     <label className="pr-4 font-semibold">Category</label>
-                    <select className="p-2" {...register('category')}>
-                        <option defaultChecked>My Day</option>
-                        <option>Personal</option>
-                        <option>Projects</option>
+                    <select
+                        className="p-2"
+                        value={category}
+                        onChange={(e) => {
+                            setCategory(e.target.value)
+                        }}
+                    >
+                        <option value={TaskFilter.MyDay}>My Day</option>
+                        <option value={TaskFilter.Personal}>Personal</option>
+                        <option value={TaskFilter.Project}>Projects</option>
                     </select>
                 </div>
                 <div className="my-2 flex justify-end">
-                    <input
+                    <button
                         className="mx-5 bg-main bg-opacity-90 text-bg rounded-md px-5 py-1.5 cursor-pointer hover:opacity-75 transition-opacity"
-                        type="submit"
-                        value="Add"
-                    />
+                        type="button"
+                        onClick={onSubmitHandler}
+                    >
+                        Add
+                    </button>
                     <button
                         type="button"
                         onClick={() => setModal(false)}

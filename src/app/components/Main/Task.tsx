@@ -42,7 +42,7 @@ function Task({ task }: { task: Task }) {
     }
 
     return (
-        <div className=" m-4 p-2 border-[1px] border-slate-200 rounded-lg flex items-center bg-white bg-opacity-50">
+        <div className=" m-4 py-2 px-6 border-[1px] border-slate-200 rounded-lg flex items-center bg-white bg-opacity-50 shadow-md">
             {isEdit ? (
                 <div className=" py-2 px-6 flex items-center justify-between w-full">
                     <input
@@ -67,7 +67,7 @@ function Task({ task }: { task: Task }) {
                 </div>
             ) : (
                 <>
-                    <div className="mx-3">
+                    <div className="mr-3">
                         <FaCheckCircle
                             fill={task.isCompleted ? '#65a30d' : ''}
                             onClick={taskCompletedHandler}
@@ -95,7 +95,7 @@ function Task({ task }: { task: Task }) {
                             )}
                         </p>
                     </div>
-                    <div className="flex w-[15%] justify-between mr-4 items-center ml-auto">
+                    <div className="flex w-max justify-between mr-4 items-center ml-auto gap-x-5">
                         <FaEdit
                             onClick={taskEditHandler}
                             fill="#0ea5e9"
