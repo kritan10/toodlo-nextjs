@@ -2,7 +2,6 @@
 
 import { useContext, useState } from 'react'
 import Modal from 'react-modal'
-import { useForm } from 'react-hook-form'
 import { TasksDispatchContext } from '@/app/providers/tasks'
 import { ACTIONTYPE, Task } from '@/app/interfaces'
 import { TaskFilter } from '@/app/interfaces'
