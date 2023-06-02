@@ -5,6 +5,13 @@
 @layer base {
     html {
         @apply text-text;
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 }
 
